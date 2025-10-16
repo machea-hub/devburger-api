@@ -1,8 +1,22 @@
 import { v4 } from 'uuid';
 import User from '../models/User.js';
+import * as Yup from 'yup';
 
 class UserController {
   async store(req, res) {
+    const schema = Yup.object({
+      name: Yup.string().required(),
+      email: Yup.string().email().required(),
+      password_hash: Yup.string().min(6).required(),
+      admin: Yup.boolean(),
+    });
+
+    try {
+      schema.validateSync(req.body, { abortEarly: false, strict: true });
+    } catch (err) {
+      return res.status(400).json({ error: err.errors });
+    }
+
     const { name, email, password_hash, admin } = req.body;
 
     const existingUser = await User.findOne({
@@ -12,9 +26,7 @@ class UserController {
     });
 
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ message: 'Esse e-mail já está cadastrado' });
+      return res.status(400).json({ message: 'E-mail already taken!' });
     }
 
     const user = await User.create({

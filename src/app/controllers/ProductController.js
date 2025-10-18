@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import Product from './../models/Product.js';
-import { request } from 'express';
 
 class ProductController {
   async store(request, response) {

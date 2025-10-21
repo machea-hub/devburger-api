@@ -22,6 +22,18 @@ routes.post(
   upload.single('file'),
   ProductController.store,
 );
+routes.post(
+  '/products',
+  adminMiddleware,
+  upload.single('file'),
+  ProductController.store,
+);
+routes.put(
+  '/products/:id',
+  adminMiddleware,
+  upload.single('file'),
+  ProductController.update,
+);
 routes.get('/products', ProductController.index);
 
 routes.post('/categories', adminMiddleware, CategoryController.store);

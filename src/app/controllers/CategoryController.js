@@ -64,7 +64,7 @@ class CategoryController {
       return response.status(400).json({ error: 'Caregory already exists' });
     }
 
-    const newCategory = await Category.update(
+await Category.update(
       {
         name,
         path,

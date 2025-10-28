@@ -39,11 +39,16 @@ export const RightContainer = styled.div`
 
     background: url('${Background}');
     background-color: #1e1e1e;
+    background-size: cover;
+    background-position: center;
+    
 
     p {
         color: #fff;
         font-size: 18px;
         font-weight: 800;
+        display: flex;
+        justify-content: center;
 
         a{
             color: #fff;
@@ -56,18 +61,17 @@ export const LoginContainer = styled.div`
     background-color: #2f2f2fff;
     padding: 20px;
     border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
 
 `;
 
 export const Title = styled.h2`
     font-family: "Road Rage", sans-serif;
     font-size: 40px;
-    color: #fff;
-
-    span {
-        color: #9758a6;
-        font-family: "Road Rage", sans-serif;
-    }
+    color: #9758A6;
+    display: flex;
+    justify-content: center;
 `;
 
 export const Form = styled.form`

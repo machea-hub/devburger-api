@@ -19,11 +19,12 @@ import {
 
 import { Button } from '../../components/Button';
 
-export function Login() {
+export function Register() {
   const navigate = useNavigate();
 
   const schema = yup
     .object({
+      name: yup.string().required('O nome é obrigatório'),
       email: yup
         .string()
         .email('Digite um e-mail válido')
@@ -32,6 +33,10 @@ export function Login() {
         .string()
         .min(6, 'A senha deve ter pelo menos 6 caracteres')
         .required('Digite uma senha'),
+      confirmPassword: yup
+        .string()
+        .oneOf([yup.ref('password')], 'As senhas devem ser iguais')
+        .required('Confirme sua senha'),
     })
     .required();
 
@@ -46,8 +51,9 @@ export function Login() {
   const onSubmit = async (data) => {
     try {
       const { status } = await api.post(
-        '/sessions',
+        '/users',
         {
+          name: data.name,
           email: data.email,
           password: data.password,
         },
@@ -58,11 +64,11 @@ export function Login() {
 
       if (status === 200 || status === 201) {
         setTimeout(() => {
-          navigate('/');
+          navigate('/login');
         }, 2000);
-        toast.success('Login realizado com sucesso!');
+        toast.success('Conta criada com sucesso!');
       } else if (status === 400) {
-        toast.error('E-mail ou senha inválidos!');
+        toast.error('E-mail já cadastrado! Faça login para continuar.');
       } else {
         throw new Error();
       }
@@ -78,25 +84,36 @@ export function Login() {
       </LeftContainer>
       <RightContainer>
         <LoginContainer>
-          <Title>
-            Olá, seja bem vindo ao <span>Dev Burguer!</span> <br /> Acesse com
-            seu <span>Login e senha.</span>
-          </Title>
+          <Title>Criar conta</Title>
           <Form onSubmit={handleSubmit(onSubmit)}>
+            <InputContainer>
+              <label htmlFor="name">Nome</label>
+              <input type="text" {...register('name')} />
+              <p>{errors?.name?.message}</p>
+            </InputContainer>
+
             <InputContainer>
               <label htmlFor="email">Email</label>
               <input type="email" {...register('email')} />
               <p>{errors?.email?.message}</p>
             </InputContainer>
+
             <InputContainer>
               <label htmlFor="password">Senha</label>
               <input type="password" {...register('password')} />
               <p>{errors?.password?.message}</p>
             </InputContainer>
-            <Button type="submit">Entrar</Button>
+
+            <InputContainer>
+              <label htmlFor="confirmPassword">Confirme a senha</label>
+              <input type="password" {...register('confirmPassword')} />
+              <p>{errors?.confirmPassword?.message}</p>
+            </InputContainer>
+
+            <Button type="submit">Criar conta</Button>
           </Form>
           <p>
-            Não possui conta? <Link to="/cadastro">Clique aqui</Link>.
+            já possui conta? <Link to="/login">Clique aqui</Link>.
           </p>
         </LoginContainer>
       </RightContainer>

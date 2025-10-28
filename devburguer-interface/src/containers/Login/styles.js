@@ -51,6 +51,13 @@ export const RightContainer = styled.div`
     }
 `;
 
+export const LoginContainer = styled.div`
+    background-color: #2f2f2fff;
+    padding: 20px;
+    border-radius: 10px;
+
+`;
+
 export const Title = styled.h2`
     font-family: "Road Rage", sans-serif;
     font-size: 40px;
@@ -62,7 +69,7 @@ export const Title = styled.h2`
     }
 `;
 
-export const Form = styled.form `
+export const Form = styled.form`
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -90,8 +97,12 @@ export const InputContainer = styled.div`
         font-weight: 600;
         color: #fff;
     }
-`;
 
-export const Button = styled.button`
-
+    p {
+        font-size: 14px;
+        line-height: 80%;
+        color: #cf3057;
+        font-weight: 600;
+        height: 10px;
+    }
 `;

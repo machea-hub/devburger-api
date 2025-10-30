@@ -45,7 +45,7 @@ export function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const { status } = await api.post(
+      const response = await api.post(
         '/sessions',
         {
           email: data.email,
@@ -56,12 +56,15 @@ export function Login() {
         },
       );
 
-      if (status === 200 || status === 201) {
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+
+      if (response.status === 200 || response.status === 201) {
         setTimeout(() => {
           navigate('/');
         }, 2000);
         toast.success('Login realizado com sucesso!');
-      } else if (status === 400) {
+      } else if (response.status === 400) {
         toast.error('E-mail ou senha inválidos!');
       } else {
         throw new Error();

@@ -9,12 +9,14 @@ export const Banner = styled.div`
     height: 480px;
 
     h1 {
-        font-family: "Road Rage", sans-serif; 
+        font-family: "Road Rage", sans-serif;
         font-size: 80px;
-        color: #f4f4f4;
+        line-height: 65px;
+        color: #fff;
         position: absolute;
+
         right: 20%;
-        top: 10%;
+        top: 30%;
     }
 `;
 

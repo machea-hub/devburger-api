@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { api } from '../../services/api.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../hooks/UserContext.jsx';
 
 import Logo from '../../assets/logo.svg';
 import {
@@ -21,6 +22,8 @@ import { Button } from '../../components/Button';
 
 export function Login() {
   const navigate = useNavigate();
+
+  const { putUserData } = useUser();
 
   const schema = yup
     .object({
@@ -56,8 +59,7 @@ export function Login() {
         },
       );
 
-      const token = response.data.token;
-      localStorage.setItem('token', token);
+      putUserData(response.data);
 
       if (response.status === 200 || response.status === 201) {
         setTimeout(() => {

@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Login } from '../containers/Login';
-import { Register } from '../containers/Register';
-import { Home } from '../containers/Home';
-import { Menu } from '../containers/Menu';
 import { Header } from '../components/Header';
+import { Home } from '../containers/Home';
+import { Login } from '../containers/Login';
+import { Menu } from '../containers/Menu';
+import { Register } from '../containers/Register';
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +25,11 @@ export const router = createBrowserRouter([
   },
   {
     path: '/cardapio',
-    element: <Menu />,
+    element: (
+      <>
+        <Header />
+        <Menu />
+      </>
+    ),
   },
 ]);

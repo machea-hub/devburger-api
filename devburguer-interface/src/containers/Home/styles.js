@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import BannerHome from '../../assets/banner-home.svg';
 import Background from '../../assets/background.svg';
+import BannerHome from '../../assets/banner-home.svg';
 
 export const Banner = styled.div`
     background: url('${BannerHome}');
@@ -26,4 +26,3 @@ export const Container = styled.section`
     background-position: center;
 
 `;
-

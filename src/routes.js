@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import UserController from './app/controllers/UserController.js';
-import SessionController from './app/controllers/SessionController.js';
-import ProductController from './app/controllers/ProductController.js';
 import multer from 'multer';
-import multerConfig from './config/multer.cjs';
 import CategoryController from './app/controllers/CategoryController.js';
-import authMiddleware from './app/middlewares/auth.js';
-import adminMiddleware from './app/middlewares/admin.js';
 import OrderController from './app/controllers/OrderController.js';
+import ProductController from './app/controllers/ProductController.js';
+import SessionController from './app/controllers/SessionController.js';
+import CreatPaymentIntent from './app/controllers/stripe/CreatPaymentIntent.js';
+import UserController from './app/controllers/UserController.js';
+import adminMiddleware from './app/middlewares/admin.js';
+import authMiddleware from './app/middlewares/auth.js';
+import multerConfig from './config/multer.cjs';
 
 const routes = new Router();
 
@@ -23,12 +24,7 @@ routes.post(
   upload.single('file'),
   ProductController.store,
 );
-routes.post(
-  '/products',
-  adminMiddleware,
-  upload.single('file'),
-  ProductController.store,
-);
+
 routes.put(
   '/products/:id',
   adminMiddleware,
@@ -54,5 +50,7 @@ routes.get('/categories', CategoryController.index);
 routes.post('/orders', OrderController.store);
 routes.get('/orders', OrderController.index);
 routes.put('/orders/:id', adminMiddleware, OrderController.update);
+
+routes.post('/create-payment-intent', CreatPaymentIntent.store);
 
 export default routes;

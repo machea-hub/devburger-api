@@ -8,7 +8,7 @@ const calculateOrderAmount = (items) => {
     return current.price * current.quantity + acc;
   }, 0);
 
-  return total * 100;
+  return total;
 };
 
 class CreatPaymentIntentController {
@@ -45,6 +45,7 @@ class CreatPaymentIntentController {
 
     res.json({
       clientSecret: paymentIntent.client_secret,
+      dpmCheckerLink: `https://dashboard.stripe.com/settings/payment_methods/review?transaction_id=${paymentIntent.id}`,
     });
   }
 }

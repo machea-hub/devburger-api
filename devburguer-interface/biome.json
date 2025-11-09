@@ -19,8 +19,13 @@
 			"complexity": {
 				"noThisInStatic": "off",
 				"useOptionalChain": "off"
+			},
+			"correctness": {
+        		"useUniqueElementIds": "off"
+      		},
+			"a11y": {
+        		"noSvgWithoutTitle": "off"
 			}
-		}
 	},
 	"javascript": {
 		"formatter": {
